@@ -25,16 +25,6 @@ def test_cria_produto():
         ],
     )
 
-    aux_instrucoes = product_data["instrucoes_de_armazenamento"]
-
-    product_repr = (
-        f"O produto {product_data['nome_do_produto']}"
-        f" fabricado em {product_data['data_de_fabricacao']}"
-        f" por {product_data['nome_da_empresa']} com validade"
-        f" até {product_data['data_de_validade']}"
-        f" precisa ser armazenado {aux_instrucoes}."
-    )
-
     assert product.id == product_data["id"]
     assert product.nome_do_produto == product_data["nome_do_produto"]
     assert product.nome_da_empresa == product_data["nome_da_empresa"]
@@ -47,4 +37,3 @@ def test_cria_produto():
         product.instrucoes_de_armazenamento
         == product_data["instrucoes_de_armazenamento"]
     )
-    assert repr(product) == product_repr
