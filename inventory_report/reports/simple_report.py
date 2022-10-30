@@ -35,7 +35,7 @@ class SimpleReport:
         return closest_expiry_item[0]
 
     @staticmethod
-    def _get_company_with_more_products(list: List[Dict[str, str]]):
+    def _total_product_by_company(list: List[Dict[str, str]]):
         companies = {}
         for item in list:
             company_name = item["nome_da_empresa"]
@@ -43,6 +43,12 @@ class SimpleReport:
                 companies[company_name]["total"] += 1
             else:
                 companies[company_name] = {"total": 1, "name": company_name}
+
+        return companies
+
+    @staticmethod
+    def _get_company_with_more_products(list: List[Dict[str, str]]):
+        companies = SimpleReport._total_product_by_company(list=list)
 
         company_with_more_products = max(
             companies, key=lambda company: companies[company]["total"]
