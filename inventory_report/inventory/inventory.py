@@ -1,9 +1,10 @@
 import csv
 import pathlib
+import xmltodict
+import json
 from typing import Dict, List
 from inventory_report.reports.complete_report import CompleteReport
 from inventory_report.reports.simple_report import SimpleReport
-import xmltodict
 
 
 class Inventory:
@@ -30,6 +31,14 @@ class Inventory:
         return data
 
     @staticmethod
+    def __load_data_json__(path: str):
+        with open(path, "r") as file:
+            content = file.read()
+        data = json.loads(content)
+
+        return data
+
+    @staticmethod
     def __generate_report__(data: List[Dict[str, str]], type: str):
         if type == "simples":
             return SimpleReport.generate(list=data)
@@ -51,6 +60,8 @@ class Inventory:
             inventory_list = Inventory.__load_data_csv__(path=path)
         elif suffix == ".xml":
             inventory_list = Inventory.__load_data_xml__(path=path)
+        elif suffix == ".json":
+            inventory_list = Inventory.__load_data_json__(path=path)
         else:
             raise ValueError(
                 f"This function is incompatible with {suffix} files"
