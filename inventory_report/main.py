@@ -31,11 +31,6 @@ def get_report(data, type_report):
 
 
 def main():
-    """_summary_
-
-    Returns:
-        _type_: _description_
-    """
     if len(sys.argv) < 3:
         return print("Verifique os argumentos", file=sys.stderr)
 
